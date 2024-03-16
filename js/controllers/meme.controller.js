@@ -82,3 +82,8 @@ function onUpdateMemeLine(elLine) {
     gCurrMeme.lines[lineIdx].txt = elLine.value
     renderMeme()
 }
+
+function downloadMeme(elLink) {
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
