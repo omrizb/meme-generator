@@ -1,13 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
-    <title>MemeGenerator</title>
-</head>
-<body>
-    <h1>Welcome to MemeGenerator</h1>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/styles.css" />
+        <title>MemeGenerator</title>
+    </head>
+    <body class="main-layout" onload="onInit()">
+        <header class="main-header full main-layout">
+            <div class="logo">MemeGenerator</div>
+            <ui class="clean-list">
+                <li>
+                    <button
+                        data-page="gallery"
+                        onclick="onSetActiveSection(this)"
+                    >
+                        Gallery
+                    </button>
+                </li>
+                <li>
+                    <button
+                        data-page="saved"
+                        onclick="onSetActiveSection(this)"
+                    >
+                        Saved
+                    </button>
+                </li>
+                <li>
+                    <button
+                        data-page="about"
+                        onclick="onSetActiveSection(this)"
+                    >
+                        About
+                    </button>
+                </li>
+            </ui>
+        </header>
+
+        <main>
+            <section class="page gallery">
+                <main>
+                    <section class="filter-search-memes">
+                        <input type="search" />
+                    </section>
+                    <section>Filter by: ......</section>
+                </main>
+            </section>
+            <section class="page editor">
+                <main>
+                    <canvas class="edit-meme" width="400" height="400"></canvas>
+                    Edit the canvas here
+                </main>
+            </section>
+            <section class="page saved">Saved memes</section>
+        </main>
+
+        <footer></footer>
+        <script src="./js/main.js"></script>
+    </body>
 </html>
