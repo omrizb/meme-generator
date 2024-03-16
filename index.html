@@ -11,28 +11,15 @@
             <div class="logo">MemeGenerator</div>
             <ui class="clean-list">
                 <li>
-                    <button
-                        data-page="gallery"
-                        onclick="onSetActiveSection(this)"
-                    >
+                    <button onclick="onSetActiveSection('gallery')">
                         Gallery
                     </button>
                 </li>
                 <li>
-                    <button
-                        data-page="saved"
-                        onclick="onSetActiveSection(this)"
-                    >
-                        Saved
-                    </button>
+                    <button onclick="onSetActiveSection('saved')">Saved</button>
                 </li>
                 <li>
-                    <button
-                        data-page="about"
-                        onclick="onSetActiveSection(this)"
-                    >
-                        About
-                    </button>
+                    <button onclick="onSetActiveSection('about')">About</button>
                 </li>
             </ui>
         </header>
@@ -54,10 +41,11 @@
                         type="text"
                         class="meme-line"
                         placeholder="Add text here..."
-                        data-line-idx=""
+                        data-line-idx="0"
                         oninput="onUpdateMemeLine(this)"
                     />
                     Edit the canvas here
+                    <button>Save</button>
                 </main>
             </section>
             <section class="page saved">Saved memes</section>

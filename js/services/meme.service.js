@@ -39,6 +39,27 @@ function getMeme(id) {
     return gMemes.find(meme => meme.id === id)
 }
 
+function getNewMeme(imgId) {
+    return {
+        id: generateRandId(6),
+        img: getImg(imgId),
+        lines: [
+            {
+                txt: 'Enter your meme...',
+                fontFace: 'arial',
+                fontSize: '30',
+                lineWidth: '1',
+                strokeStyle: 'red',
+                fillStyle: 'yellow',
+                posPercent: {
+                    x: 50,
+                    y: 20
+                }
+            },
+        ]
+    }
+}
+
 function getAllMemes() {
     return gMemes
 }

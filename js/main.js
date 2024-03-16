@@ -1,16 +1,14 @@
 'use strict'
 
-let gCurrPageSection = 'editor'
+let gCurrPageSection = 'gallery'
 
 function onInit() {
     setActiveSection()
     renderGallery()
-    initMemeCanvas()
-    renderMeme()
 }
 
-function onSetActiveSection(elPageBtn) {
-    gCurrPageSection = elPageBtn.dataset.page
+function onSetActiveSection(section) {
+    gCurrPageSection = section
     setActiveSection()
 }
 

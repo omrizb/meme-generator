@@ -10,28 +10,20 @@ let gElCanvas
 let gCtx
 let gCurrMeme
 
-function initMemeCanvas() {
+function initMemeEditor(memeId, imgId) {
+    setMemeCanvas()
+    setCurrMeme(memeId, imgId)
+    renderMeme()
+}
+
+function setMemeCanvas() {
     gElCanvas = document.querySelector('canvas.edit-meme')
     gCtx = gElCanvas.getContext('2d')
-    setCurrMeme()
-    setTextProps()
 }
 
-function setCurrMeme() {
-    gCurrMeme = getMeme('123')
-}
-
-function setTextProps(props = {}) {
-    let fontFace = props.fontFace || TEXT_FONT
-    let fontSize = props.fontSize || TEXT_SIZE
-    gCtx.font = `${fontSize}px ${fontFace}`
-
-    gCtx.lineWidth = props.lineWidth || TEXT_LINE_WIDTH
-    gCtx.strokeStyle = props.strokeStyle || TEXT_LINE_COLOR
-    gCtx.fillStyle = props.fillStyle || TEXT_FILL_COLOR
-
-    gCtx.textAlign = 'center'
-    gCtx.textBaseline = 'middle'
+function setCurrMeme(memeId, imgId) {
+    if (memeId) gCurrMeme = getMeme(memeId)
+    else gCurrMeme = getNewMeme(imgId)
 }
 
 function renderMeme() {
@@ -61,6 +53,19 @@ function drawLines(lines) {
     })
 }
 
+function setTextProps(props = {}) {
+    let fontFace = props.fontFace || TEXT_FONT
+    let fontSize = props.fontSize || TEXT_SIZE
+    gCtx.font = `${fontSize}px ${fontFace}`
+
+    gCtx.lineWidth = props.lineWidth || TEXT_LINE_WIDTH
+    gCtx.strokeStyle = props.strokeStyle || TEXT_LINE_COLOR
+    gCtx.fillStyle = props.fillStyle || TEXT_FILL_COLOR
+
+    gCtx.textAlign = 'center'
+    gCtx.textBaseline = 'middle'
+}
+
 function drawText(text, x, y) {
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
@@ -73,6 +78,7 @@ function getCanvasPosByPercent(widthPercent, heightPercent) {
 }
 
 function onUpdateMemeLine(elLine) {
-    setMemeLineTxt(gCurrMeme.id, 0, elLine.value)
+    const lineIdx = elLine.dataset.lineIdx
+    gCurrMeme.lines[lineIdx].txt = elLine.value
     renderMeme()
 }
