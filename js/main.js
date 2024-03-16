@@ -4,7 +4,8 @@ let gCurrPageSection = 'editor'
 
 function onInit() {
     setActiveSection()
-    initCanvas()
+    renderGallery()
+    initMemeCanvas()
     renderMeme()
 }
 

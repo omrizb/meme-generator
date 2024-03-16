@@ -10,7 +10,7 @@ let gElCanvas
 let gCtx
 let gCurrMeme
 
-function initCanvas() {
+function initMemeCanvas() {
     gElCanvas = document.querySelector('canvas.edit-meme')
     gCtx = gElCanvas.getContext('2d')
     setCurrMeme()
