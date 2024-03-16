@@ -9,4 +9,5 @@
 
 /* Components */
 @import url("./components/canvas.css");
+@import url("./components/gallery.css");
 @import url("./components/header.css");
