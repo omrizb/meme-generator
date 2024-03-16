@@ -8,12 +8,17 @@ const TEXT_FILL_COLOR = 'orange'
 
 let gElCanvas
 let gCtx
-let gTextProps
+let gCurrMeme
 
 function initCanvas() {
     gElCanvas = document.querySelector('canvas.edit-meme')
     gCtx = gElCanvas.getContext('2d')
+    setCurrMeme()
     setTextProps()
+}
+
+function setCurrMeme() {
+    gCurrMeme = getMeme('123')
 }
 
 function setTextProps(props = {}) {
@@ -30,14 +35,14 @@ function setTextProps(props = {}) {
 }
 
 function renderMeme() {
-    const meme = getMeme('123')
-
     const elImg = new Image()
-    elImg.src = meme.img.url
+    elImg.src = gCurrMeme.img.url
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawLines(meme.lines)
+        drawLines(gCurrMeme.lines)
     }
+
+    document.querySelector('.editor .meme-line').value = gCurrMeme.lines[0].txt
 }
 
 function drawLines(lines) {
@@ -65,4 +70,9 @@ function getCanvasPosByPercent(widthPercent, heightPercent) {
     let x = gElCanvas.width * widthPercent / 100
     let y = gElCanvas.height * heightPercent / 100
     return { x, y }
+}
+
+function onUpdateMemeLine(elLine) {
+    setMemeLineTxt(gCurrMeme.id, 0, elLine.value)
+    renderMeme()
 }

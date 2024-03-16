@@ -49,6 +49,13 @@
             <section class="page editor">
                 <main>
                     <canvas class="edit-meme" width="400" height="400"></canvas>
+                    <input
+                        type="text"
+                        class="meme-line"
+                        placeholder="Add text here..."
+                        data-line-idx=""
+                        oninput="onUpdateMemeLine(this)"
+                    />
                     Edit the canvas here
                 </main>
             </section>

@@ -61,11 +61,12 @@ function getMeme(id) {
 }
 
 function getAllMemes() {
-
+    return gMemes
 }
 
-function saveMeme() {
-
+function setMemeLineTxt(id, lineIdx, txt) {
+    const meme = getMeme(id)
+    meme.lines[lineIdx].txt = txt
 }
 
 function deleteMeme(id) {
