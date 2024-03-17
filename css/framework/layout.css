@@ -19,3 +19,21 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1em;
 }
+
+.editor-layout {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 1fr;
+    gap: 30px;
+}
+
+.editor-layout > :first-child {
+    grid-row: 1 / 4;
+    grid-column: 1;
+    place-self: center end;
+}
+
+.editor-layout > :not(:first-child) {
+    place-self: center center;
+    display: flex;
+    gap: 20px;
+}

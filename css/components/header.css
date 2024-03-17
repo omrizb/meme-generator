@@ -1,3 +1,5 @@
 .main-header {
     background-color: aquamarine;
+    margin-block-end: 2em;
+    padding: 1em;
 }

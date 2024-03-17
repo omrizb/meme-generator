@@ -10,8 +10,8 @@ let gMemes = [
                 fontFace: 'arial',
                 fontSize: '30',
                 lineWidth: '1',
-                strokeStyle: 'red',
-                fillStyle: 'yellow',
+                strokeStyle: '#ff0000',
+                fillStyle: '#ffff00',
                 posPercent: {
                     x: 50,
                     y: 20
@@ -22,8 +22,8 @@ let gMemes = [
                 fontFace: 'arial',
                 fontSize: '45',
                 lineWidth: '1',
-                strokeStyle: 'darkblue',
-                fillStyle: 'white',
+                strokeStyle: '#00008b',
+                fillStyle: '#ffffff',
                 posPercent: {
                     x: 65,
                     y: 80

@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="./css/styles.css" />
         <title>MemeGenerator</title>
     </head>
+
     <body class="main-layout" onload="onInit()">
         <header class="main-header full main-layout">
             <div class="logo">MemeGenerator</div>
@@ -35,7 +36,7 @@
                 </main>
             </section>
             <section class="page editor">
-                <main>
+                <main class="editor-layout">
                     <canvas class="edit-meme" width="400" height="400"></canvas>
                     <input
                         type="text"
@@ -44,15 +45,38 @@
                         data-line-idx="0"
                         oninput="onUpdateMemeLine(this)"
                     />
-                    Edit the canvas here
-                    <button>Save</button>
-                    <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg">Download</button>
+                    <div class="text-style">
+                        Line color:
+                        <input
+                            type="color"
+                            class="line-color"
+                            data-line-idx="0"
+                            onchange="onUpdateLineColor(this)"
+                        />
+                        Fill color:
+                        <input
+                            type="color"
+                            class="fill-color"
+                            data-line-idx="0"
+                            onchange="onUpdateFillColor(this)"
+                        />
+                    </div>
+                    <div class="actions">
+                        <button>Save</button>
+                        <a
+                            href="#"
+                            onclick="downloadMeme(this)"
+                            download="my-meme.jpg"
+                            >Download</a
+                        >
+                    </div>
                 </main>
             </section>
             <section class="page saved">Saved memes</section>
         </main>
 
         <footer></footer>
+
         <script src="./js/services/storage.service.js"></script>
         <script src="./js/services/utils.service.js"></script>
         <script src="./js/services/gallery.service.js"></script>

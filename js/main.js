@@ -1,10 +1,11 @@
 'use strict'
 
-let gCurrPageSection = 'gallery'
+let gCurrPageSection = 'editor'
 
 function onInit() {
     setActiveSection()
     renderGallery()
+    initMemeEditor('123', null)
 }
 
 function onSetActiveSection(section) {

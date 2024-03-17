@@ -35,6 +35,8 @@ function renderMeme() {
     }
 
     document.querySelector('.editor .meme-line').value = gCurrMeme.lines[0].txt
+    document.querySelector('.editor .line-color').value = gCurrMeme.lines[0].strokeStyle
+    document.querySelector('.editor .fill-color').value = gCurrMeme.lines[0].fillStyle
 }
 
 function drawLines(lines) {
@@ -80,6 +82,18 @@ function getCanvasPosByPercent(widthPercent, heightPercent) {
 function onUpdateMemeLine(elLine) {
     const lineIdx = elLine.dataset.lineIdx
     gCurrMeme.lines[lineIdx].txt = elLine.value
+    renderMeme()
+}
+
+function onUpdateLineColor(elColor) {
+    const lineIdx = elColor.dataset.lineIdx
+    gCurrMeme.lines[lineIdx].strokeStyle = elColor.value
+    renderMeme()
+}
+
+function onUpdateFillColor(elColor) {
+    const lineIdx = elColor.dataset.lineIdx
+    gCurrMeme.lines[lineIdx].fillStyle = elColor.value
     renderMeme()
 }
 
