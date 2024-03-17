@@ -12,9 +12,7 @@
             <div class="logo">MemeGenerator</div>
             <ui class="clean-list">
                 <li>
-                    <button onclick="onSetActiveSection('gallery')">
-                        Gallery
-                    </button>
+                    <button onclick="onSetActiveSection('gallery')">Gallery</button>
                 </li>
                 <li>
                     <button onclick="onSetActiveSection('saved')">Saved</button>
@@ -47,28 +45,15 @@
                     />
                     <div class="text-style">
                         Line color:
-                        <input
-                            type="color"
-                            class="line-color"
-                            data-line-idx="0"
-                            onchange="onUpdateLineColor(this)"
-                        />
+                        <input type="color" class="line-color" data-line-idx="0" onchange="onUpdateLineColor(this)" />
                         Fill color:
-                        <input
-                            type="color"
-                            class="fill-color"
-                            data-line-idx="0"
-                            onchange="onUpdateFillColor(this)"
-                        />
+                        <input type="color" class="fill-color" data-line-idx="0" onchange="onUpdateFillColor(this)" />
+                        <button class="inc-font-size" data-line-idx="0" onclick="onIncreaseFontSize(this)">+</button>
+                        <button class="dec-font-size" data-line-idx="0" onclick="onDecreaseFontSize(this)">-</button>
                     </div>
                     <div class="actions">
                         <button>Save</button>
-                        <a
-                            href="#"
-                            onclick="downloadMeme(this)"
-                            download="my-meme.jpg"
-                            >Download</a
-                        >
+                        <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg">Download</a>
                     </div>
                 </main>
             </section>

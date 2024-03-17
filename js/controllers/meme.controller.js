@@ -97,6 +97,24 @@ function onUpdateFillColor(elColor) {
     renderMeme()
 }
 
+function onIncreaseFontSize(elIncFontSize) {
+    const lineIdx = elIncFontSize.dataset.lineIdx
+    const currFontSize = +gCurrMeme.lines[lineIdx].fontSize
+    if (currFontSize > 70) return
+
+    gCurrMeme.lines[lineIdx].fontSize = (currFontSize + 2) + ''
+    renderMeme()
+}
+
+function onDecreaseFontSize(elDecFontSize) {
+    const lineIdx = elDecFontSize.dataset.lineIdx
+    const currFontSize = +gCurrMeme.lines[lineIdx].fontSize
+    if (currFontSize < 16) return
+
+    gCurrMeme.lines[lineIdx].fontSize = (currFontSize - 2) + ''
+    renderMeme()
+}
+
 function downloadMeme(elLink) {
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
