@@ -36,7 +36,7 @@ let gMemes = [
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 function getMeme(id) {
-    return gMemes.find(meme => meme.id === id)
+    return structuredClone(gMemes.find(meme => meme.id === id))
 }
 
 function getNewMeme(imgId) {
@@ -61,14 +61,38 @@ function getNewMeme(imgId) {
 }
 
 function getAllMemes() {
-    return gMemes
+    return structuredClone(gMemes)
 }
 
-function setMemeLineTxt(id, lineIdx, txt) {
+function addMemeLine(id, line) {
     const meme = getMeme(id)
-    meme.lines[lineIdx].txt = txt
+    const newLine = {
+        txt: line.txt,
+        fontFace: line.fontFace,
+        fontSize: line.fontSize,
+        lineWidth: line.lineWidth,
+        strokeStyle: line.strokeStyle,
+        fillStyle: line.fillStyle,
+        posPercent: {
+            x: line.posPercent.x,
+            y: line.posPercent.y
+        }
+    }
+    meme.lines.push(newLine)
+    return meme.lines[meme.lines.length - 1]
 }
 
-function deleteMeme(id) {
+function setMemeLineTxt(id, lineIdx, line) {
+    const meme = getMeme(id)
+    meme.lines[lineIdx].txt = line.txt
+}
 
+function updateMemeLine(id, lineIdx, newLine) {
+    const meme = getMeme(id)
+    meme.lines[lineIdx] = deepMerge(meme.lines[lineIdx], newLine)
+}
+
+function deleteMemeLine(id, lineIdx) {
+    const meme = getMeme(id)
+    meme.lines.splice(lineIdx, 1)
 }

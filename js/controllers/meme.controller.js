@@ -9,10 +9,12 @@ const TEXT_FILL_COLOR = 'orange'
 let gElCanvas
 let gCtx
 let gCurrMeme
+let gCurrLineIdx
 
 function initMemeEditor(memeId, imgId) {
     setMemeCanvas()
     setCurrMeme(memeId, imgId)
+    gCurrLineIdx = 0
     renderMeme()
 }
 
@@ -34,9 +36,11 @@ function renderMeme() {
         drawLines(gCurrMeme.lines)
     }
 
-    document.querySelector('.editor .meme-line').value = gCurrMeme.lines[0].txt
-    document.querySelector('.editor .line-color').value = gCurrMeme.lines[0].strokeStyle
-    document.querySelector('.editor .fill-color').value = gCurrMeme.lines[0].fillStyle
+    const currLine = gCurrMeme.lines[gCurrLineIdx]
+    if (!currLine) return
+    document.querySelector('.editor .meme-line').value = currLine.txt
+    document.querySelector('.editor .line-color').value = currLine.strokeStyle
+    document.querySelector('.editor .fill-color').value = currLine.fillStyle
 }
 
 function drawLines(lines) {
@@ -79,39 +83,71 @@ function getCanvasPosByPercent(widthPercent, heightPercent) {
     return { x, y }
 }
 
+function onAddLine() {
+    const currLine = gCurrMeme.lines[gCurrLineIdx]
+    const x = (currLine) ? currLine.posPercent.x + 5 : 50
+    const y = (currLine) ? currLine.posPercent.y + 5 : 20
+
+    const newLine = {
+        txt: 'Say something smart...',
+        fontFace: 'arial',
+        fontSize: 36,
+        lineWidth: 2,
+        strokeStyle: document.querySelector('.editor .line-color').value,
+        fillStyle: document.querySelector('.editor .fill-color').value,
+        posPercent: {
+            x,
+            y
+        }
+    }
+
+    gCurrMeme.lines.push(newLine)
+    gCurrLineIdx = gCurrMeme.lines.length - 1
+    renderMeme()
+}
+
+function onSwitchLine() {
+    gCurrLineIdx = (gCurrLineIdx === gCurrMeme.lines.length - 1) ? 0 : gCurrLineIdx + 1
+    renderMeme()
+}
+
+function onDeleteLine() {
+    gCurrMeme.lines.splice(gCurrLineIdx, 1)
+    gCurrLineIdx = (gCurrLineIdx === 0) ? gCurrMeme.lines.length - 1 : gCurrLineIdx - 1
+    renderMeme()
+}
+
 function onUpdateMemeLine(elLine) {
-    const lineIdx = elLine.dataset.lineIdx
-    gCurrMeme.lines[lineIdx].txt = elLine.value
+    if (!gCurrMeme.lines[gCurrLineIdx]) return
+    gCurrMeme.lines[gCurrLineIdx].txt = elLine.value
     renderMeme()
 }
 
 function onUpdateLineColor(elColor) {
-    const lineIdx = elColor.dataset.lineIdx
-    gCurrMeme.lines[lineIdx].strokeStyle = elColor.value
+    if (!gCurrMeme.lines[gCurrLineIdx]) return
+    gCurrMeme.lines[gCurrLineIdx].strokeStyle = elColor.value
     renderMeme()
 }
 
 function onUpdateFillColor(elColor) {
-    const lineIdx = elColor.dataset.lineIdx
-    gCurrMeme.lines[lineIdx].fillStyle = elColor.value
+    if (!gCurrMeme.lines[gCurrLineIdx]) return
+    gCurrMeme.lines[gCurrLineIdx].fillStyle = elColor.value
     renderMeme()
 }
 
-function onIncreaseFontSize(elIncFontSize) {
-    const lineIdx = elIncFontSize.dataset.lineIdx
-    const currFontSize = +gCurrMeme.lines[lineIdx].fontSize
+function onIncreaseFontSize() {
+    const currFontSize = +gCurrMeme.lines[gCurrLineIdx].fontSize
     if (currFontSize > 70) return
 
-    gCurrMeme.lines[lineIdx].fontSize = (currFontSize + 2) + ''
+    gCurrMeme.lines[gCurrLineIdx].fontSize = (currFontSize + 2) + ''
     renderMeme()
 }
 
-function onDecreaseFontSize(elDecFontSize) {
-    const lineIdx = elDecFontSize.dataset.lineIdx
-    const currFontSize = +gCurrMeme.lines[lineIdx].fontSize
+function onDecreaseFontSize() {
+    const currFontSize = +gCurrMeme.lines[gCurrLineIdx].fontSize
     if (currFontSize < 16) return
 
-    gCurrMeme.lines[lineIdx].fontSize = (currFontSize - 2) + ''
+    gCurrMeme.lines[gCurrLineIdx].fontSize = (currFontSize - 2) + ''
     renderMeme()
 }
 

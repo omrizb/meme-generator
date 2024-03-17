@@ -40,16 +40,20 @@
                         type="text"
                         class="meme-line"
                         placeholder="Add text here..."
-                        data-line-idx="0"
                         oninput="onUpdateMemeLine(this)"
                     />
+                    <div class="line-actions">
+                        <button class="add-line" onclick="onAddLine()">Add Line</button>
+                        <button class="switch-line" onclick="onSwitchLine()">Switch Line</button>
+                        <button class="remove-line" onclick="onDeleteLine()">Remove Line</button>
+                    </div>
                     <div class="text-style">
                         Line color:
-                        <input type="color" class="line-color" data-line-idx="0" onchange="onUpdateLineColor(this)" />
+                        <input type="color" class="line-color" onchange="onUpdateLineColor(this)" />
                         Fill color:
-                        <input type="color" class="fill-color" data-line-idx="0" onchange="onUpdateFillColor(this)" />
-                        <button class="inc-font-size" data-line-idx="0" onclick="onIncreaseFontSize(this)">+</button>
-                        <button class="dec-font-size" data-line-idx="0" onclick="onDecreaseFontSize(this)">-</button>
+                        <input type="color" class="fill-color" onchange="onUpdateFillColor(this)" />
+                        <button class="inc-font-size" onclick="onIncreaseFontSize()">+</button>
+                        <button class="dec-font-size" onclick="onDecreaseFontSize()">-</button>
                     </div>
                     <div class="actions">
                         <button>Save</button>
