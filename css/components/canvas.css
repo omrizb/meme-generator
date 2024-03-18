@@ -1,3 +1,8 @@
 canvas.edit-meme {
     background-color: #dddddd;
+    cursor: grab;
+}
+
+.grabbing {
+    cursor: grabbing !important;
 }

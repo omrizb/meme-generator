@@ -2,10 +2,80 @@
 
 let gElCanvas
 let gCtx
+let gIsDown = false
+let gMovingLineIdx = -1
+
+const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
 function setMemeCanvas() {
     gElCanvas = document.querySelector('canvas.edit-meme')
     gCtx = gElCanvas.getContext('2d')
+
+    addListeners()
+}
+
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
+}
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousedown', onDown)
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchend', onUp)
+}
+
+function onDown(ev) {
+    gIsDown = true
+    gElCanvas.classList.add('grabbing')
+
+    const startPos = getEvPos(ev)
+    gMovingLineIdx = isPosInsideLine(startPos)
+    if (gMovingLineIdx !== -1) setCurrMemeLineDrag(gMovingLineIdx, true)
+}
+
+function onMove(ev) {
+    if (!gIsDown) return
+
+    const line = getCurrMeme().lines[gMovingLineIdx]
+    if (!line.isDrag) return
+
+    const linePos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
+    const newX = linePos.x + ev.movementX
+    const newY = linePos.y + ev.movementY
+    const newPosPercent = getCanvasPercentFromPos(newX, newY)
+    setLinePos(gMovingLineIdx, newPosPercent.widthPercent, newPosPercent.heightPercent)
+}
+
+function onUp() {
+    setCurrMemeLineDrag(gMovingLineIdx, false)
+    gIsDown = false
+    gElCanvas.classList.remove('grabbing')
+}
+
+function getEvPos(ev) {
+
+    if (TOUCH_EVENTS.includes(ev.type)) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+
+        return {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    } else {
+        return {
+            x: ev.offsetX,
+            y: ev.offsetY,
+        }
+    }
+
 }
 
 function drawImageWithLines(imgSrc, lines, currLineIdx) {
@@ -19,32 +89,25 @@ function drawImageWithLines(imgSrc, lines, currLineIdx) {
 
 function drawLines(lines, currLineIdx) {
     lines.forEach((line, idx) => {
-        const { fontFace, fontSize, lineWidth, strokeStyle, fillStyle } = line
-        setTextProps({
-            fontFace,
-            fontSize,
-            lineWidth,
-            strokeStyle,
-            fillStyle,
-        })
+        setTextProps(gCtx, line)
 
-        let textPos = getCanvasPosByPercent(line.posPercent.x, line.posPercent.y)
+        const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
         drawText(line.txt, textPos.x, textPos.y)
-        if (idx === currLineIdx) drawTextFrame(line.txt, textPos.x, textPos.y)
+        if (idx === currLineIdx) drawTextFrame(line, textPos.x, textPos.y)
     })
 }
 
-function setTextProps(props = {}) {
-    let fontFace = props.fontFace || TEXT_FONT
-    let fontSize = props.fontSize || TEXT_SIZE
-    gCtx.font = `${fontSize}px ${fontFace}`
+function setTextProps(ctx, line) {
+    let fontFace = line.fontFace
+    let fontSize = line.fontSize
+    ctx.font = `${fontSize}px ${fontFace}`
 
-    gCtx.lineWidth = props.lineWidth || TEXT_LINE_WIDTH
-    gCtx.strokeStyle = props.strokeStyle || TEXT_LINE_COLOR
-    gCtx.fillStyle = props.fillStyle || TEXT_FILL_COLOR
+    ctx.lineWidth = line.lineWidth
+    ctx.strokeStyle = line.strokeStyle
+    ctx.fillStyle = line.fillStyle
 
-    gCtx.textAlign = 'center'
-    gCtx.textBaseline = 'middle'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
 }
 
 function drawText(text, x, y) {
@@ -52,17 +115,53 @@ function drawText(text, x, y) {
     gCtx.strokeText(text, x, y)
 }
 
-function drawTextFrame(text, x, y) {
-    const txtMetrics = gCtx.measureText(text)
-    const dx = Math.ceil(txtMetrics.width / 2) + 8
-    const dyUp = Math.ceil(txtMetrics.fontBoundingBoxAscent) + 2
-    const dyDown = Math.ceil(txtMetrics.fontBoundingBoxDescent) + 2
+function drawTextFrame(line, x, y) {
+    const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
 
     gCtx.strokeRect(x - dx, y - dyUp, 2 * dx, dyUp + dyDown)
 }
 
-function getCanvasPosByPercent(widthPercent, heightPercent) {
-    let x = gElCanvas.width * widthPercent / 100
-    let y = gElCanvas.height * heightPercent / 100
-    return { x, y }
+function getCanvasPosFromPercent(widthPercent, heightPercent) {
+    return {
+        x: gElCanvas.width * widthPercent / 100,
+        y: gElCanvas.height * heightPercent / 100
+    }
+}
+
+function getCanvasPercentFromPos(x, y) {
+    return {
+        widthPercent: 100 * x / gElCanvas.width,
+        heightPercent: 100 * y / gElCanvas.height
+    }
+}
+
+function isPosInsideLine(pos) {
+    let res = -1
+    const meme = getCurrMeme()
+    meme.lines.forEach((line, idx) => {
+        const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
+        const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
+        if ((pos.x <= textPos.x + dx)
+            && (pos.x >= textPos.x - dx)
+            && (pos.y <= textPos.y + dyDown)
+            && (pos.y >= textPos.y - dyUp)) {
+            res = idx
+        }
+    })
+    return res
+}
+
+function getTextFrameMetrics(line) {
+    const elTempCanvas = document.createElement('canvas')
+    const tempCtx = elTempCanvas.getContext('2d')
+
+    setTextProps(tempCtx, line)
+
+    const txtMetrics = tempCtx.measureText(line.txt)
+
+    return {
+        dx: Math.ceil(txtMetrics.width / 2) + 8,
+        dyUp: Math.ceil(txtMetrics.fontBoundingBoxAscent) + 2,
+        dyDown: Math.ceil(txtMetrics.fontBoundingBoxDescent) + 2
+    }
 }
