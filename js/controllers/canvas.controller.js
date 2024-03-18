@@ -90,9 +90,12 @@ function drawImageWithLines(imgSrc, lines, currLineIdx) {
 function drawLines(lines, currLineIdx) {
     lines.forEach((line, idx) => {
         setTextProps(gCtx, line)
+        setTextProps(gCtx, line)
 
         const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
+        const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
         drawText(line.txt, textPos.x, textPos.y)
+        if (idx === currLineIdx) drawTextFrame(line, textPos.x, textPos.y)
         if (idx === currLineIdx) drawTextFrame(line, textPos.x, textPos.y)
     })
 }
@@ -101,67 +104,121 @@ function setTextProps(ctx, line) {
     let fontFace = line.fontFace
     let fontSize = line.fontSize
     ctx.font = `${fontSize}px ${fontFace}`
+    function setTextProps(ctx, line) {
+        let fontFace = line.fontFace
+        let fontSize = line.fontSize
+        ctx.font = `${fontSize}px ${fontFace}`
 
-    ctx.lineWidth = line.lineWidth
-    ctx.strokeStyle = line.strokeStyle
-    ctx.fillStyle = line.fillStyle
+        ctx.lineWidth = line.lineWidth
+        ctx.strokeStyle = line.strokeStyle
+        ctx.fillStyle = line.fillStyle
+        ctx.lineWidth = line.lineWidth
+        ctx.strokeStyle = line.strokeStyle
+        ctx.fillStyle = line.fillStyle
 
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-}
-
-function drawText(text, x, y) {
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
-}
-
-function drawTextFrame(line, x, y) {
-    const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
-
-    gCtx.strokeRect(x - dx, y - dyUp, 2 * dx, dyUp + dyDown)
-}
-
-function getCanvasPosFromPercent(widthPercent, heightPercent) {
-    return {
-        x: gElCanvas.width * widthPercent / 100,
-        y: gElCanvas.height * heightPercent / 100
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
     }
-}
 
-function getCanvasPercentFromPos(x, y) {
-    return {
-        widthPercent: 100 * x / gElCanvas.width,
-        heightPercent: 100 * y / gElCanvas.height
+    function drawText(text, x, y) {
+        gCtx.fillText(text, x, y)
+        gCtx.strokeText(text, x, y)
     }
-}
 
-function isPosInsideLine(pos) {
-    let res = -1
-    const meme = getCurrMeme()
-    meme.lines.forEach((line, idx) => {
+    function drawTextFrame(line, x, y) {
         const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
-        const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
-        if ((pos.x <= textPos.x + dx)
-            && (pos.x >= textPos.x - dx)
-            && (pos.y <= textPos.y + dyDown)
-            && (pos.y >= textPos.y - dyUp)) {
-            res = idx
+        function drawTextFrame(line, x, y) {
+            const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
+
+            gCtx.strokeRect(x - dx, y - dyUp, 2 * dx, dyUp + dyDown)
         }
-    })
-    return res
-}
 
-function getTextFrameMetrics(line) {
-    const elTempCanvas = document.createElement('canvas')
-    const tempCtx = elTempCanvas.getContext('2d')
+        function getCanvasPosFromPercent(widthPercent, heightPercent) {
+            return {
+                x: gElCanvas.width * widthPercent / 100,
+                y: gElCanvas.height * heightPercent / 100
+            }
+        }
 
-    setTextProps(tempCtx, line)
+        function getCanvasPercentFromPos(x, y) {
+            return {
+                widthPercent: 100 * x / gElCanvas.width,
+                heightPercent: 100 * y / gElCanvas.height
+            }
+        }
 
-    const txtMetrics = tempCtx.measureText(line.txt)
+        function isPosInsideLine(pos) {
+            let res = -1
+            const meme = getCurrMeme()
+            meme.lines.forEach((line, idx) => {
+                const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
+                const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
+                if ((pos.x <= textPos.x + dx)
+                    && (pos.x >= textPos.x - dx)
+                    && (pos.y <= textPos.y + dyDown)
+                    && (pos.y >= textPos.y - dyUp)) {
+                    res = idx
+                }
+            })
+            return res
+        }
 
-    return {
-        dx: Math.ceil(txtMetrics.width / 2) + 8,
-        dyUp: Math.ceil(txtMetrics.fontBoundingBoxAscent) + 2,
-        dyDown: Math.ceil(txtMetrics.fontBoundingBoxDescent) + 2
-    }
-}
+        function getTextFrameMetrics(line) {
+            const elTempCanvas = document.createElement('canvas')
+            const tempCtx = elTempCanvas.getContext('2d')
+
+            setTextProps(tempCtx, line)
+
+            const txtMetrics = tempCtx.measureText(line.txt)
+
+            return {
+                dx: Math.ceil(txtMetrics.width / 2) + 8,
+                dyUp: Math.ceil(txtMetrics.fontBoundingBoxAscent) + 2,
+                dyDown: Math.ceil(txtMetrics.fontBoundingBoxDescent) + 2
+            }
+            function getCanvasPosFromPercent(widthPercent, heightPercent) {
+                return {
+                    x: gElCanvas.width * widthPercent / 100,
+                    y: gElCanvas.height * heightPercent / 100
+                }
+            }
+
+            function getCanvasPercentFromPos(x, y) {
+                return {
+                    widthPercent: 100 * x / gElCanvas.width,
+                    heightPercent: 100 * y / gElCanvas.height
+                }
+            }
+
+            function isPosInsideLine(pos) {
+                let res = -1
+                const meme = getCurrMeme()
+                meme.lines.forEach((line, idx) => {
+                    const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
+                    const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
+                    if ((pos.x <= textPos.x + dx)
+                        && (pos.x >= textPos.x - dx)
+                        && (pos.y <= textPos.y + dyDown)
+                        && (pos.y >= textPos.y - dyUp)) {
+                        res = idx
+                    }
+                })
+                return res
+            }
+
+            function getTextFrameMetrics(line) {
+                const elTempCanvas = document.createElement('canvas')
+                const tempCtx = elTempCanvas.getContext('2d')
+
+                setTextProps(tempCtx, line)
+
+                const txtMetrics = tempCtx.measureText(line.txt)
+
+                return {
+                    dx: Math.ceil(txtMetrics.width / 2) + 8,
+                    dyUp: Math.ceil(txtMetrics.fontBoundingBoxAscent) + 2,
+                    dyDown: Math.ceil(txtMetrics.fontBoundingBoxDescent) + 2
+                }
+            }
