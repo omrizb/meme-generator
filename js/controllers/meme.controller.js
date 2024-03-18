@@ -1,11 +1,5 @@
 'use strict'
 
-const TEXT_FONT = 'arial'
-const TEXT_SIZE = '45'
-const TEXT_LINE_WIDTH = '2'
-const TEXT_LINE_COLOR = 'darkred'
-const TEXT_FILL_COLOR = 'orange'
-
 let gCurrMeme
 let gCurrLineIdx
 
@@ -19,6 +13,10 @@ function initMemeEditor(memeId, imgId) {
 function setCurrMeme(memeId, imgId) {
     if (memeId) gCurrMeme = getMeme(memeId)
     else gCurrMeme = getNewMeme(imgId)
+}
+
+function getCurrMeme() {
+    return gCurrMeme
 }
 
 function renderMeme() {
@@ -36,18 +34,11 @@ function onAddLine() {
     const x = (currLine) ? currLine.posPercent.x + 5 : 50
     const y = (currLine) ? currLine.posPercent.y + 5 : 20
 
-    const newLine = {
-        txt: 'Say something smart...',
-        fontFace: 'arial',
-        fontSize: 36,
-        lineWidth: 2,
-        strokeStyle: document.querySelector('.editor .line-color').value,
-        fillStyle: document.querySelector('.editor .fill-color').value,
-        posPercent: {
-            x,
-            y
-        }
-    }
+    const newLine = getNewLine('Say something smart...')
+    newLine.strokeStyle = document.querySelector('.editor .line-color').value
+    newLine.fillStyle = document.querySelector('.editor .fill-color').value
+    newLine.posPercent.x = x
+    newLine.posPercent.y = y
 
     gCurrMeme.lines.push(newLine)
     gCurrLineIdx = gCurrMeme.lines.length - 1
@@ -96,6 +87,18 @@ function onDecreaseFontSize() {
     if (currFontSize < 16) return
 
     gCurrMeme.lines[gCurrLineIdx].fontSize = (currFontSize - 2) + ''
+    renderMeme()
+}
+
+function setCurrMemeLineDrag(lineIdx, value) {
+    if (lineIdx === -1) return
+    gCurrMeme.lines[lineIdx].isDrag = value
+}
+
+function setLinePos(lineIdx, newX, newY) {
+    const line = gCurrMeme.lines[lineIdx]
+    line.posPercent.x = newX
+    line.posPercent.y = newY
     renderMeme()
 }
 

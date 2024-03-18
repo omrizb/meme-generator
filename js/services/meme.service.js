@@ -12,6 +12,7 @@ let gMemes = [
                 lineWidth: '1',
                 strokeStyle: '#ff0000',
                 fillStyle: '#ffff00',
+                isDrag: false,
                 posPercent: {
                     x: 50,
                     y: 20
@@ -24,6 +25,7 @@ let gMemes = [
                 lineWidth: '1',
                 strokeStyle: '#00008b',
                 fillStyle: '#ffffff',
+                isDrag: false,
                 posPercent: {
                     x: 65,
                     y: 80
@@ -49,14 +51,31 @@ function getNewMeme(imgId) {
                 fontFace: 'arial',
                 fontSize: '30',
                 lineWidth: '1',
-                strokeStyle: 'red',
-                fillStyle: 'yellow',
+                strokeStyle: '#ff0000',
+                fillStyle: '#ffff00',
+                isDrag: false,
                 posPercent: {
                     x: 50,
                     y: 20
                 }
             },
         ]
+    }
+}
+
+function getNewLine(txt) {
+    return {
+        txt,
+        fontFace: 'arial',
+        fontSize: 30,
+        lineWidth: 1,
+        strokeStyle: '#000000',
+        fillStyle: '#ffffff',
+        isDrag: false,
+        posPercent: {
+            x: 0,
+            y: 0
+        }
     }
 }
 
@@ -73,6 +92,7 @@ function addMemeLine(id, line) {
         lineWidth: line.lineWidth,
         strokeStyle: line.strokeStyle,
         fillStyle: line.fillStyle,
+        isDrag: false,
         posPercent: {
             x: line.posPercent.x,
             y: line.posPercent.y
