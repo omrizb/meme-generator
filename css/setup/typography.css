@@ -1,0 +1,9 @@
+@font-face {
+    font-family: roboto-serif;
+    src: url("/assets/fonts/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf");
+}
+
+@font-face {
+    font-family: source-sans;
+    src: url("/assets/fonts/SourceSans3-VariableFont_wght.ttf");
+}
