@@ -4,6 +4,7 @@
         minmax(20px, 1fr)
         minmax(600px, 5fr)
         minmax(20px, 1fr);
+    grid-template-rows: auto auto 1fr auto;
 }
 
 .main-layout > *:not(.full) {

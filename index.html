@@ -9,19 +9,24 @@
 
     <body class="main-layout" onload="onInit()">
         <header class="main-header full main-layout">
-            <div class="logo">MemeGenerator</div>
-            <ui class="clean-list">
+            <section class="header-container">
+                <div class="logo">Meme<span class="logo-2">Generator</span></div>
+            </section>
+        </header>
+
+        <nav class="main-nav full main-layout">
+            <ui class="links clean-list">
                 <li>
-                    <button onclick="onSetActiveSection('gallery')">Gallery</button>
+                    <a href="#" onclick="onSetActiveSection('gallery')">Gallery</a>
                 </li>
                 <li>
-                    <button onclick="onSetActiveSection('saved')">Saved</button>
+                    <a href="#" onclick="onSetActiveSection('saved')">Saved</a>
                 </li>
-                <li>
-                    <button onclick="onSetActiveSection('about')">About</button>
+                <li class="flex justify-end">
+                    <a href="#" onclick="onSetActiveSection('about')">About</a>
                 </li>
             </ui>
-        </header>
+        </nav>
 
         <main>
             <section class="page gallery">
@@ -43,20 +48,20 @@
                         oninput="onUpdateMemeLine(this)"
                     />
                     <div class="line-actions">
-                        <button class="add-line" onclick="onAddLine()">Add Line</button>
-                        <button class="switch-line" onclick="onSwitchLine()">Switch Line</button>
-                        <button class="remove-line" onclick="onDeleteLine()">Remove Line</button>
+                        <button class="add-line btn1" onclick="onAddLine()">Add Line</button>
+                        <button class="switch-line btn1" onclick="onSwitchLine()">Switch Line</button>
+                        <button class="remove-line btn1" onclick="onDeleteLine()">Remove Line</button>
                     </div>
                     <div class="text-style">
                         Line color:
                         <input type="color" class="line-color" onchange="onUpdateLineColor(this)" />
                         Fill color:
                         <input type="color" class="fill-color" onchange="onUpdateFillColor(this)" />
-                        <button class="inc-font-size" onclick="onIncreaseFontSize()">+</button>
-                        <button class="dec-font-size" onclick="onDecreaseFontSize()">-</button>
+                        <button class="inc-font-size btn1" onclick="onIncreaseFontSize()">+</button>
+                        <button class="dec-font-size btn1" onclick="onDecreaseFontSize()">-</button>
                     </div>
                     <div class="actions">
-                        <button>Save</button>
+                        <button class="btn-save">Save</button>
                         <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg">Download</a>
                     </div>
                 </main>
@@ -64,7 +69,9 @@
             <section class="page saved">Saved memes</section>
         </main>
 
-        <footer></footer>
+        <footer class="main-footer full main-layout">
+            <p>&copy; All nights deserve 2024</p>
+        </footer>
 
         <script src="./js/services/storage.service.js"></script>
         <script src="./js/services/utils.service.js"></script>

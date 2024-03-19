@@ -1,0 +1,5 @@
+.main-footer {
+    padding-block: 0.5em;
+    font-size: 1.2em;
+    background-color: var(--nav-background);
+}

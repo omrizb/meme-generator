@@ -1,5 +1,20 @@
 .main-header {
-    background-color: aquamarine;
-    margin-block-end: 2em;
-    padding: 1em;
+    background-image: var(--header-gradient);
+}
+
+.main-header .header-container {
+    display: flex;
+    padding-block: 2em;
+}
+
+.main-header .logo {
+    flex-grow: 1;
+    font-family: roboto-serif;
+    font-size: 3em;
+    color: var(--red-8);
+}
+
+.main-header .logo-2 {
+    font-weight: 700;
+    color: var(--red-11);
 }

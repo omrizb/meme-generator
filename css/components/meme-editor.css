@@ -1,0 +1,5 @@
+.editor-layout {
+    padding: 2em;
+    border-radius: 1em;
+    background-color: var(--editor-background);
+}

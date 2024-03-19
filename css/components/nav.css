@@ -1,0 +1,21 @@
+.main-nav {
+    margin-block-end: 2em;
+    padding-block: 0.5em;
+    background-color: var(--nav-background);
+}
+
+.main-nav .links {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+.main-nav a {
+    text-decoration: none;
+    font-size: 1.5em;
+    color: var(--nav-link);
+}
+
+.main-nav .links > li:last-of-type {
+    flex-grow: 1;
+}
