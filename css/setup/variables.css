@@ -6,9 +6,10 @@
     --logo-part2: #962020;
 
     --nav-background: var(--yellow-1);
-    --nav-link: #343a40;
+    --nav-link: #212529;
 
-    --primary-text: #495057;
+    --primary-text: #343a40;
+    --primary-border: #343a40;
 
     --editor-background: #e9ecef;
 
