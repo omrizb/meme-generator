@@ -37,7 +37,10 @@ function onDown(ev) {
 
     const startPos = getEvPos(ev)
     gMovingLineIdx = isPosInsideLine(startPos)
-    if (gMovingLineIdx !== -1) setCurrMemeLineDrag(gMovingLineIdx, true)
+    if (gMovingLineIdx !== -1) {
+        setCurrMemeLineDrag(gMovingLineIdx, true)
+        selectLine(gMovingLineIdx)
+    }
 }
 
 function onMove(ev) {
@@ -137,8 +140,8 @@ function getCanvasPercentFromPos(x, y) {
 
 function isPosInsideLine(pos) {
     let res = -1
-    const meme = getCurrMeme()
-    meme.lines.forEach((line, idx) => {
+    const lines = getLines()
+    lines.forEach((line, idx) => {
         const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
         const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
         if ((pos.x <= textPos.x + dx)
