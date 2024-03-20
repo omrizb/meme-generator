@@ -1,3 +1,12 @@
+.btn {
+    padding: 0.2em 1em;
+    border: 1px solid var(--btn-border);
+    border-radius: 0.5em;
+    color: var(--btn-text);
+    background-color: var(--btn-background);
+    cursor: pointer;
+}
+
 .btn1 {
     padding: 0.2em 1em;
     border: 1px solid var(--btn1-border);

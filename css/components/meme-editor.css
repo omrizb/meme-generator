@@ -4,6 +4,17 @@
     background-color: var(--editor-background);
 }
 
+.page.editor a {
+    padding: 0.5em 1em;
+    border: 1px solid var(--btn-border);
+    border-radius: 0.5em;
+    background-color: var(--btn-background);
+    font-size: 1em;
+    text-decoration: none;
+    color: var(--btn-text);
+    cursor: pointer;
+}
+
 .page.editor .meme-line {
     width: 300px;
     padding: 0.3em 1em;
@@ -11,4 +22,28 @@
     border-radius: 2em;
     font-family: source-sans;
     font-size: 1.2em;
+}
+
+.page.editor .add-line {
+    background-color: var(--add-line-background);
+}
+
+.page.editor .add-line:hover {
+    background-color: var(--add-line-hover);
+}
+
+.page.editor .switch-line {
+    background-color: var(--switch-line-background);
+}
+
+.page.editor .switch-line:hover {
+    background-color: var(--switch-line-hover);
+}
+
+.page.editor .remove-line {
+    background-color: var(--remove-line-background);
+}
+
+.page.editor .remove-line:hover {
+    background-color: var(--remove-line-hover);
 }

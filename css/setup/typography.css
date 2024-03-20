@@ -7,3 +7,26 @@
     font-family: source-sans;
     src: url("/assets/fonts/SourceSans3-VariableFont_wght.ttf");
 }
+
+/* Font Awesome */
+
+@font-face {
+    font-family: fa-solid;
+    src: url("/assets/fonts/fa-solid-900.ttf");
+}
+
+.fa-solid::before {
+    font-family: fa-solid;
+}
+
+.fa-solid.add::before {
+    content: "\2b";
+}
+
+.fa-solid.switch::before {
+    content: "\f363";
+}
+
+.fa-solid.trash::before {
+    content: "\f1f8";
+}
