@@ -16,7 +16,7 @@
 
     --btn-border: #495057;
     --btn-background: #e9ecef;
-    --btn-highlight: #dee2e6;
+    --btn-hover: #dee2e6;
 
     --add-line-background: #b2f2bb;
     --add-line-hover: #8ce99a;
@@ -26,6 +26,10 @@
 
     --remove-line-background: #ffc9c9;
     --remove-line-hover: #ffa8a8;
+
+    /* Color button properties */
+    --line-color: #000000;
+    --line-fill-color: #000000;
 
     /* Not using yet */
 

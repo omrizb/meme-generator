@@ -30,3 +30,27 @@
 .fa-solid.trash::before {
     content: "\f1f8";
 }
+
+.fa-solid.text-color::before {
+    content: "\f031";
+}
+
+.fa-solid.text-fill-color::before {
+    content: "\f576";
+}
+
+.fa-solid.align-left::before {
+    content: "\f036";
+}
+
+.fa-solid.align-center::before {
+    content: "\f037";
+}
+
+.fa-solid.align-right::before {
+    content: "\f038";
+}
+
+.fa-solid.text-size::before {
+    content: "\f034";
+}

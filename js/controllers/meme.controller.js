@@ -26,8 +26,18 @@ function renderMeme() {
     const currLine = getCurrLine()
     if (!currLine) return
     document.querySelector('.editor .meme-line').value = currLine.txt
-    document.querySelector('.editor .line-color').value = currLine.strokeStyle
-    document.querySelector('.editor .fill-color').value = currLine.fillStyle
+    setElementsLineColor(currLine)
+    setElementsFillColor(currLine)
+}
+
+function setElementsLineColor(line) {
+    document.querySelector('.editor .line-color').value = line.strokeStyle
+    document.documentElement.style.setProperty('--line-color', line.strokeStyle)
+}
+
+function setElementsFillColor(line) {
+    document.querySelector('.editor .fill-color').value = line.fillStyle
+    document.documentElement.style.setProperty('--line-fill-color', line.fillStyle)
 }
 
 function downloadMeme(elLink) {

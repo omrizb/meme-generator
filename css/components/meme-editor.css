@@ -7,9 +7,10 @@
     gap: 1em;
 }
 
-.editor-top-panel .line-actions {
+.editor-top-panel > *:not(:first-child) {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 0.5em;
 }
 
@@ -25,7 +26,7 @@
     background-image: var(--meme-editor-gradient);
 }
 
-.page.editor a {
+.page.editor .btn {
     padding: 0.5em 1em;
     border: 1px solid var(--btn-border);
     border-radius: 0.5em;
@@ -33,7 +34,12 @@
     font-size: 1em;
     text-decoration: none;
     color: var(--btn-text);
+    box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.1);
     cursor: pointer;
+}
+
+.page.editor .btn:hover {
+    background-color: var(--btn-hover);
 }
 
 .page.editor .meme-line {
@@ -67,4 +73,31 @@
 
 .page.editor .remove-line:hover {
     background-color: var(--remove-line-hover);
+}
+
+.page.editor input[type="color"] {
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+}
+
+.fa-solid.text-color::after {
+    content: "";
+    position: absolute;
+    transform: translate(-1.5em, 1.25em);
+    width: 2em;
+    height: 0.4em;
+    background-color: var(--line-color);
+}
+
+.fa-solid.text-fill-color::after {
+    content: "";
+    position: absolute;
+    transform: translate(-1.65em, 1.25em);
+    width: 2em;
+    height: 0.4em;
+    background-color: var(--line-fill-color);
 }

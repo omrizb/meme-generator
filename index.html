@@ -51,21 +51,27 @@
                             oninput="onUpdateMemeLine(this)"
                         />
                         <div class="line-actions">
-                            <a href="#" class="add-line fa-solid add" onclick="onAddLine()"></a>
-                            <a href="#" class="switch-line fa-solid switch" onclick="onSwitchLine()"></a>
-                            <a href="#" class="remove-line fa-solid trash" onclick="onDeleteLine()"></a>
+                            <a href="#" class="btn add-line fa-solid add" onclick="onAddLine()"></a>
+                            <a href="#" class="btn switch-line fa-solid switch" onclick="onSwitchLine()"></a>
+                            <a href="#" class="btn remove-line fa-solid trash" onclick="onDeleteLine()"></a>
+                        </div>
+                        <div class="font-actions1">
+                            <a href="#" class="btn fa-solid text-size" onclick="onIncreaseFontSize()">+</a>
+                            <a href="#" class="btn fa-solid text-size" onclick="onDecreaseFontSize()">-</a>
+                            <label class="btn fa-solid text-color">
+                                <input type="color" class="line-color" onchange="onUpdateLineColor(this)" />
+                            </label>
+                            <label class="btn fa-solid text-fill-color">
+                                <input type="color" class="fill-color" onchange="onUpdateFillColor(this)" />
+                            </label>
+                        </div>
+                        <div class="font-actions2">
+                            <a href="#" class="btn fa-solid align-left" onclick=""></a>
+                            <a href="#" class="btn fa-solid align-center" onclick=""></a>
+                            <a href="#" class="btn fa-solid align-right" onclick=""></a>
                         </div>
                     </div>
-                    <div class="editor-mid-panel">
-                        <div class="text-style">
-                            Line color:
-                            <input type="color" class="line-color" onchange="onUpdateLineColor(this)" />
-                            Fill color:
-                            <input type="color" class="fill-color" onchange="onUpdateFillColor(this)" />
-                            <button class="inc-font-size btn1" onclick="onIncreaseFontSize()">+</button>
-                            <button class="dec-font-size btn1" onclick="onDecreaseFontSize()">-</button>
-                        </div>
-                    </div>
+                    <div class="editor-mid-panel"></div>
                     <div class="editor-bot-panel">
                         <div class="actions">
                             <button class="btn-save">Save</button>

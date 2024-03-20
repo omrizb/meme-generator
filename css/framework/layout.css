@@ -24,7 +24,7 @@
 .editor-layout {
     display: grid;
     grid-template-columns: minmax(200px, 1fr) 1fr;
-    grid-template-rows: 1fr 1px;
+    grid-template-rows: repeat(3, min-content) 1px;
     gap: 30px;
 }
 
