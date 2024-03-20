@@ -11,12 +11,21 @@ function setMemeCanvas() {
     gElCanvas = document.querySelector('canvas.edit-meme')
     gCtx = gElCanvas.getContext('2d')
 
+    resizeCanvas()
     addListeners()
 }
 
 function addListeners() {
+    addWindowListeners()
     addMouseListeners()
     addTouchListeners()
+}
+
+function addWindowListeners() {
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+        renderMeme()
+    })
 }
 
 function addMouseListeners() {
@@ -84,6 +93,8 @@ function getEvPos(ev) {
 function drawImageWithLines(imgSrc, lines, currLineIdx) {
     const elImg = new Image()
     elImg.src = imgSrc
+    gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
+
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         drawLines(lines, currLineIdx)
@@ -167,4 +178,12 @@ function getTextFrameMetrics(line) {
         dyUp: Math.ceil(txtMetrics.fontBoundingBoxAscent) + 2,
         dyDown: Math.ceil(txtMetrics.fontBoundingBoxDescent) + 2
     }
+}
+
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+
+    if (elContainer.clientWidth < 200) gElCanvas.width = 200
+    else if (elContainer.clientWidth < 400) gElCanvas.width = elContainer.clientWidth
+    else gElCanvas.width = 400
 }

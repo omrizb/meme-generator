@@ -1,7 +1,28 @@
+/* Layout */
+
+.editor-top-panel {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.editor-top-panel .line-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.editor-top-panel .line-actions > *:last-child {
+    margin-left: 1.5em;
+}
+
+/* Design*/
+
 .editor-layout {
     padding: 2em;
     border-radius: 1em;
-    background-color: var(--editor-background);
+    background-image: var(--meme-editor-gradient);
 }
 
 .page.editor a {

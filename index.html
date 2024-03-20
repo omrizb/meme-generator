@@ -40,29 +40,37 @@
             </section>
             <section class="page editor">
                 <main class="editor-layout">
-                    <canvas class="edit-meme" width="400" height="400"></canvas>
-                    <input
-                        type="text"
-                        class="meme-line"
-                        placeholder="Add text here..."
-                        oninput="onUpdateMemeLine(this)"
-                    />
-                    <div class="line-actions">
-                        <a href="#" class="add-line fa-solid add" onclick="onAddLine()"></a>
-                        <a href="#" class="switch-line fa-solid switch" onclick="onSwitchLine()"></a>
-                        <a href="#" class="remove-line fa-solid trash" onclick="onDeleteLine()"></a>
+                    <div class="canvas-container">
+                        <canvas class="edit-meme"></canvas>
                     </div>
-                    <div class="text-style">
-                        Line color:
-                        <input type="color" class="line-color" onchange="onUpdateLineColor(this)" />
-                        Fill color:
-                        <input type="color" class="fill-color" onchange="onUpdateFillColor(this)" />
-                        <button class="inc-font-size btn1" onclick="onIncreaseFontSize()">+</button>
-                        <button class="dec-font-size btn1" onclick="onDecreaseFontSize()">-</button>
+                    <div class="editor-top-panel">
+                        <input
+                            type="text"
+                            class="meme-line"
+                            placeholder="Add text here..."
+                            oninput="onUpdateMemeLine(this)"
+                        />
+                        <div class="line-actions">
+                            <a href="#" class="add-line fa-solid add" onclick="onAddLine()"></a>
+                            <a href="#" class="switch-line fa-solid switch" onclick="onSwitchLine()"></a>
+                            <a href="#" class="remove-line fa-solid trash" onclick="onDeleteLine()"></a>
+                        </div>
                     </div>
-                    <div class="actions">
-                        <button class="btn-save">Save</button>
-                        <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg">Download</a>
+                    <div class="editor-mid-panel">
+                        <div class="text-style">
+                            Line color:
+                            <input type="color" class="line-color" onchange="onUpdateLineColor(this)" />
+                            Fill color:
+                            <input type="color" class="fill-color" onchange="onUpdateFillColor(this)" />
+                            <button class="inc-font-size btn1" onclick="onIncreaseFontSize()">+</button>
+                            <button class="dec-font-size btn1" onclick="onDecreaseFontSize()">-</button>
+                        </div>
+                    </div>
+                    <div class="editor-bot-panel">
+                        <div class="actions">
+                            <button class="btn-save">Save</button>
+                            <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg">Download</a>
+                        </div>
                     </div>
                 </main>
             </section>

@@ -1,6 +1,7 @@
 :root {
     /* Colors */
     --header-gradient: linear-gradient(to right, #fff0f6, #f783ac);
+    --meme-editor-gradient: linear-gradient(to bottom, #e9ecef, #ffffff);
 
     --logo-part1: #e03131;
     --logo-part2: #962020;
