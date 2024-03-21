@@ -8,7 +8,6 @@
 @import url("./framework/layout.css");
 
 /* Components */
-@import url("./components/buttons.css");
 @import url("./components/canvas.css");
 @import url("./components/footer.css");
 @import url("./components/gallery.css");
