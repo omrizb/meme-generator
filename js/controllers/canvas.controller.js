@@ -120,7 +120,7 @@ function setTextProps(ctx, line) {
     ctx.strokeStyle = line.strokeStyle
     ctx.fillStyle = line.fillStyle
 
-    ctx.textAlign = 'center'
+    ctx.textAlign = line.textAlign
     ctx.textBaseline = 'middle'
 }
 
@@ -131,8 +131,21 @@ function drawText(text, x, y) {
 
 function drawTextFrame(line, x, y) {
     const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
+    let rectStartX
 
-    gCtx.strokeRect(x - dx, y - dyUp, 2 * dx, dyUp + dyDown)
+    switch (line.textAlign) {
+        case 'left':
+            rectStartX = x - 8
+            break
+        case 'center':
+            rectStartX = x - dx - 8
+            break
+        case 'right':
+            rectStartX = x - 2 * dx - 8
+            break
+    }
+
+    gCtx.strokeRect(rectStartX, y - dyUp - 2, 2 * (dx + 8), dyUp + dyDown + 4)
 }
 
 function getCanvasPosFromPercent(widthPercent, heightPercent) {
@@ -155,12 +168,13 @@ function isPosInsideLine(pos) {
     lines.forEach((line, idx) => {
         const { dx, dyUp, dyDown } = getTextFrameMetrics(line)
         const textPos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
-        if ((pos.x <= textPos.x + dx)
-            && (pos.x >= textPos.x - dx)
-            && (pos.y <= textPos.y + dyDown)
-            && (pos.y >= textPos.y - dyUp)) {
-            res = idx
-        }
+
+        if (line.textAlign === 'left' && (pos.x < textPos.x || pos.x > textPos.x + 2 * dx)) return
+        if (line.textAlign === 'center' && (pos.x < textPos.x - dx || pos.x > textPos.x + dx)) return
+        if (line.textAlign === 'right' && (pos.x < textPos.x - 2 * dx || pos.x > textPos.x)) return
+        if (pos.y < textPos.y - dyUp || pos.y > textPos.y + dyDown) return
+
+        res = idx
     })
     return res
 }
@@ -174,9 +188,9 @@ function getTextFrameMetrics(line) {
     const txtMetrics = tempCtx.measureText(line.txt)
 
     return {
-        dx: Math.ceil(txtMetrics.width / 2) + 8,
-        dyUp: Math.ceil(txtMetrics.fontBoundingBoxAscent) + 2,
-        dyDown: Math.ceil(txtMetrics.fontBoundingBoxDescent) + 2
+        dx: Math.ceil(txtMetrics.width / 2),
+        dyUp: Math.ceil(txtMetrics.fontBoundingBoxAscent),
+        dyDown: Math.ceil(txtMetrics.fontBoundingBoxDescent)
     }
 }
 

@@ -43,6 +43,10 @@
     background-color: var(--btn-hover);
 }
 
+.page.editor .selected {
+    border: 2px solid var(--btn-border);
+}
+
 .page.editor .meme-line {
     width: 300px;
     padding: 0.3em 1em;

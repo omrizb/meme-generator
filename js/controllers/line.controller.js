@@ -81,6 +81,11 @@ function onDecreaseFontSize() {
     renderMeme()
 }
 
+function onChangeTextAlign(newAlign) {
+    if (gLines.length === 0) return
+    changeLineTextAlign(newAlign)
+}
+
 function selectLine(idx) {
     gCurrLineIdx = idx
     renderMeme()
@@ -89,6 +94,25 @@ function selectLine(idx) {
 function setCurrMemeLineDrag(lineIdx, value) {
     if (lineIdx === -1) return
     gLines[lineIdx].isDrag = value
+}
+
+function changeLineTextAlign(newAlign) {
+    const line = getCurrLine()
+    if (line.textAlign === newAlign) return
+
+    const alignIdx = {
+        left: 0,
+        center: 1,
+        right: 2
+    }
+
+    const linePos = getCanvasPosFromPercent(line.posPercent.x, line.posPercent.y)
+    const { dx } = getTextFrameMetrics(line)
+    const newX = linePos.x + (alignIdx[newAlign] - alignIdx[line.textAlign]) * dx
+
+    line.textAlign = newAlign
+    const newPosPercent = getCanvasPercentFromPos(newX, linePos.y)
+    setLinePos(gCurrLineIdx, newPosPercent.widthPercent, newPosPercent.heightPercent)
 }
 
 function setLinePos(lineIdx, newX, newY) {

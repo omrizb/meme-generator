@@ -28,6 +28,7 @@ function renderMeme() {
     document.querySelector('.editor .meme-line').value = currLine.txt
     setElementsLineColor(currLine)
     setElementsFillColor(currLine)
+    setSelectedTextAlign(currLine)
 }
 
 function setElementsLineColor(line) {
@@ -38,6 +39,24 @@ function setElementsLineColor(line) {
 function setElementsFillColor(line) {
     document.querySelector('.editor .fill-color').value = line.fillStyle
     document.documentElement.style.setProperty('--line-fill-color', line.fillStyle)
+}
+
+function setSelectedTextAlign(line) {
+    document.querySelector('.align-left').classList.remove('selected')
+    document.querySelector('.align-center').classList.remove('selected')
+    document.querySelector('.align-right').classList.remove('selected')
+
+    switch (line.textAlign) {
+        case 'left':
+            document.querySelector('.align-left').classList.add('selected')
+            break
+        case 'center':
+            document.querySelector('.align-center').classList.add('selected')
+            break
+        case 'right':
+            document.querySelector('.align-right').classList.add('selected')
+            break
+    }
 }
 
 function downloadMeme(elLink) {
