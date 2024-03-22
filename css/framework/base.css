@@ -10,6 +10,7 @@ body {
 }
 
 img {
+    display: block;
     width: 100%;
 }
 
@@ -19,6 +20,17 @@ h3,
 p {
     margin: 0;
     padding: 0;
+}
+
+.card {
+    display: block;
+    width: 100%;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.card:hover {
+    opacity: 0.7;
 }
 
 .btn {

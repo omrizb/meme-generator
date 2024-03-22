@@ -8,17 +8,3 @@
 .gallery-header > *:last-child {
     margin-inline-start: auto;
 }
-
-.gallery .images .image {
-    background-color: lightgray;
-}
-
-.gallery .images img {
-    display: block;
-    width: 100%;
-    cursor: pointer;
-}
-
-.gallery .images img:hover {
-    opacity: 0.7;
-}

@@ -36,7 +36,7 @@
                     <a href="#" class="btn" onclick="onFeelingLucky()">I'm feeling lucky</a>
                 </header>
                 <main>
-                    <section class="images cards-layout"></section>
+                    <section class="cards cards-layout"></section>
                 </main>
             </section>
             <section class="page editor">
@@ -44,7 +44,7 @@
                     <div class="canvas-container">
                         <canvas class="edit-meme"></canvas>
                     </div>
-                    <div class="editor-top-panel">
+                    <div class="editor-panel">
                         <input
                             type="text"
                             class="meme-line"
@@ -56,6 +56,7 @@
                             <a href="#" class="btn switch-line fa-solid switch" onclick="onSwitchLine()"></a>
                             <a href="#" class="btn remove-line fa-solid trash" onclick="onDeleteLine()"></a>
                         </div>
+                        <hr class="editor-panel-break-line">
                         <div class="font-actions1">
                             <a href="#" class="btn fa-solid text-size" onclick="onIncreaseFontSize()">+</a>
                             <a href="#" class="btn fa-solid text-size" onclick="onDecreaseFontSize()">-</a>
@@ -86,12 +87,10 @@
                                 onclick="onChangeTextAlign('right')"
                             ></a>
                         </div>
-                    </div>
-                    <div class="editor-mid-panel"></div>
-                    <div class="editor-bot-panel">
-                        <div class="actions">
-                            <button class="btn save">Save</button>
-                            <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg">Download</a>
+                        <hr class="editor-panel-break-line">
+                        <div class="meme-actions">
+                            <a href="#" class="btn save" onclick="onSaveMeme()">Save</button>
+                            <a href="#" class="btn" onclick="onDownloadMeme(this)" download="my-meme.jpg">Download</a>
                         </div>
                     </div>
                 </main>
@@ -102,6 +101,8 @@
                 <p>For more information contact omrizb@gmail.com</p>
             </section>
         </main>
+
+        <div class="msg-box"></div>
 
         <footer class="main-footer full main-layout">
             <p>&copy; All nights deserve 2024</p>
