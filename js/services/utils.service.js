@@ -16,6 +16,16 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
 }
 
+function getRandomColor() {
+    let color = '#'
+    const chars = 'abcdef1234567890'
+    for (let i = 0; i < 6; i++) {
+        const randIdx = getRandomInt(0, chars.length)
+        color += chars[randIdx]
+    }
+    return color
+}
+
 function deepMerge(target, source) {
     const isObject = (obj) => obj && typeof obj === 'object'
 
