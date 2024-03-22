@@ -20,3 +20,24 @@ p {
     margin: 0;
     padding: 0;
 }
+
+.btn {
+    padding: 0.5em 1em;
+    border: 1px solid var(--btn-border);
+    border-radius: 0.5em;
+    background-color: var(--btn-background);
+    font-family: source-sans;
+    font-size: 1em;
+    text-decoration: none;
+    color: var(--btn-text);
+    box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn.selected {
+    border: 2px solid var(--btn-border);
+}
