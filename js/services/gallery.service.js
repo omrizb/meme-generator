@@ -29,7 +29,7 @@ function getAllImgs() {
     return gImgs
 }
 
-function getRandImg() {
+function getRandomImg() {
     let randIdx = getRandomInt(0, gImgs.length)
     return gImgs[randIdx]
 }

@@ -25,11 +25,14 @@ function onAddLine() {
     const x = (currLine) ? currLine.posPercent.x + 5 : 50
     const y = (currLine) ? currLine.posPercent.y + 5 : 20
 
-    const newLine = getNewLine('Say something smart...')
-    newLine.strokeStyle = document.querySelector('.editor .line-color').value
-    newLine.fillStyle = document.querySelector('.editor .fill-color').value
-    newLine.posPercent.x = x
-    newLine.posPercent.y = y
+    const lineProps = {
+        txt: 'Say something smart...',
+        strokeStyle: document.querySelector('.line-color').value,
+        fillStyle: document.querySelector('.fill-color').value,
+        textAlign: getSelectedTextAlign(),
+        posPercent: { x, y }
+    }
+    const newLine = getNewLine(lineProps)
 
     gLines.push(newLine)
     gCurrLineIdx = gLines.length - 1
@@ -94,6 +97,14 @@ function selectLine(idx) {
 function setCurrMemeLineDrag(lineIdx, value) {
     if (lineIdx === -1) return
     gLines[lineIdx].isDrag = value
+}
+
+function getSelectedTextAlign() {
+    let val
+    document.querySelectorAll('.text-align').forEach(el => {
+        if (el.classList.contains('selected')) val = el.dataset.align
+    })
+    return val
 }
 
 function changeLineTextAlign(newAlign) {

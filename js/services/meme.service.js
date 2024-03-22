@@ -1,5 +1,18 @@
 'use strict'
 
+const memeLines = [
+    'Monday vs. Friday: a mystery.',
+    'Smile, while your teeth last.',
+    'Exercise? Nope, extra fries.',
+    'Lost? Me? Always.',
+    'Reality called. Hung up.',
+    'Need a year-long holiday.',
+    'Not lazy, energy-saving.',
+    'Funny? My meme says no.',
+    'Not arguing, just right.',
+    'Coffee, because adulting is hard.'
+]
+
 let gMemes = [
     {
         id: '123',
@@ -44,43 +57,49 @@ function getMeme(id) {
 }
 
 function getNewMeme(imgId) {
+    const newLine = getRandomLine()
+    newLine.posPercent = { x: 50, y: 20 }
+
     return {
         id: generateRandId(6),
         img: getImg(imgId),
-        lines: [
-            {
-                txt: 'Enter your meme...',
-                fontFace: 'arial',
-                fontSize: '30',
-                lineWidth: '1',
-                strokeStyle: '#ff0000',
-                fillStyle: '#ffff00',
-                isDrag: false,
-                textAlign: 'center',
-                posPercent: {
-                    x: 50,
-                    y: 20
-                }
-            },
-        ]
+        lines: [newLine]
     }
 }
 
-function getNewLine(txt) {
+function getNewLine({ txt, strokeStyle, fillStyle, textAlign, posPercent }) {
     return {
         txt,
         fontFace: 'arial',
-        fontSize: 30,
+        fontSize: 26,
         lineWidth: 1,
-        strokeStyle: '#000000',
-        fillStyle: '#ffffff',
+        strokeStyle,
+        fillStyle,
         isDrag: false,
+        textAlign,
+        posPercent: {
+            x: posPercent.x,
+            y: posPercent.y
+        }
+    }
+}
+
+function getRandomLine() {
+    return getNewLine({
+        txt: getRandomLineTxt(),
+        strokeStyle: getRandomColor(),
+        fillStyle: getRandomColor(),
         textAlign: 'center',
         posPercent: {
             x: 0,
             y: 0
         }
-    }
+    })
+}
+
+function getRandomLineTxt() {
+    const randLineIdx = getRandomInt(0, gLines.length)
+    return memeLines[randLineIdx]
 }
 
 function getAllMemes() {
