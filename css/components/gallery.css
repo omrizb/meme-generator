@@ -1,3 +1,14 @@
+.gallery-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-block-end: 1.5em;
+}
+
+.gallery-header > *:last-child {
+    margin-inline-start: auto;
+}
+
 .gallery .images .image {
     background-color: lightgray;
 }

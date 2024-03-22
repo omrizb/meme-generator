@@ -16,3 +16,9 @@ function onImgSelect(imgId) {
     onSetActiveSection('editor')
     initMemeEditor(null, imgId)
 }
+
+function onFeelingLucky() {
+    const img = getRandomImg()
+    onSetActiveSection('editor')
+    initMemeEditor(null, img.id)
+}

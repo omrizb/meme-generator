@@ -1,6 +1,6 @@
 'use strict'
 
-let gCurrPageSection = 'editor'
+let gCurrPageSection = 'gallery'
 
 function onInit() {
     setActiveSection()
