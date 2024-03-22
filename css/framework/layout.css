@@ -21,6 +21,12 @@
     gap: 1em;
 }
 
+.cards-layout-big {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1em;
+}
+
 .editor-layout {
     display: grid;
     grid-template-columns: minmax(200px, 1fr) 1fr;

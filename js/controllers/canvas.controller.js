@@ -7,8 +7,8 @@ let gMovingLineIdx = -1
 
 const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
-function setMemeCanvas() {
-    gElCanvas = document.querySelector('canvas.edit-meme')
+function setMemeCanvas(canvasClassName) {
+    gElCanvas = document.querySelector(`canvas.${canvasClassName}`)
     gCtx = gElCanvas.getContext('2d')
 
     resizeCanvas()
@@ -90,7 +90,7 @@ function getEvPos(ev) {
 
 }
 
-function drawImageWithLines(imgSrc, lines, currLineIdx) {
+function drawImageWithLines(imgSrc, lines, currLineIdx = -1) {
     const elImg = new Image()
     elImg.src = imgSrc
     gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
@@ -200,4 +200,8 @@ function resizeCanvas() {
     if (elContainer.clientWidth < 200) gElCanvas.width = 200
     else if (elContainer.clientWidth < 400) gElCanvas.width = elContainer.clientWidth
     else gElCanvas.width = 400
+}
+
+function getImgDataUrl() {
+    return gElCanvas.toDataURL('image/jpeg')
 }

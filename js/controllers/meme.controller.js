@@ -3,7 +3,7 @@
 let gCurrMeme
 
 function initMemeEditor(memeId, imgId) {
-    setMemeCanvas()
+    setMemeCanvas('edit-meme')
     setCurrMeme(memeId, imgId)
     initLines()
     renderMeme()
@@ -59,7 +59,19 @@ function setSelectedTextAlign(line) {
     }
 }
 
-function downloadMeme(elLink) {
-    const imgContent = gElCanvas.toDataURL('image/jpeg')
+function onSaveMeme() {
+    gCurrMeme.snapshotImgData = getImgDataUrl()
+    saveMeme(gCurrMeme)
+    renderSavedMemes()
+}
+
+function onDownloadMeme(elLink) {
+    // const elTmpCanvas = document.createElement('canvas')
+    // elTmpCanvas.classList.add('tmp-canvas')
+    // document.body.appendChild(elTmpCanvas)
+    // setMemeCanvas('tmp-canvas')
+    // drawImageWithLines(gCurrMeme.img.url, gCurrMeme.lines, 0)
+
+    const imgContent = getImgDataUrl()
     elLink.href = imgContent
 }

@@ -1,20 +1,20 @@
 /* Layout */
 
-.editor-top-panel {
+.editor-panel {
     width: fit-content;
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.editor-top-panel > *:not(:first-child) {
+.editor-panel > *:not(:first-child) {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5em;
 }
 
-.editor-top-panel .line-actions > *:last-child {
+.editor-panel .line-actions > *:last-child {
     margin-left: 1.5em;
 }
 
@@ -24,6 +24,10 @@
     padding: 2em;
     border-radius: 1em;
     background-image: var(--meme-editor-gradient);
+}
+
+.editor-panel-break-line {
+    width: 100%;
 }
 
 .page.editor .meme-line {

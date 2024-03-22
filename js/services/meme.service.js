@@ -1,6 +1,6 @@
 'use strict'
 
-const memeLines = [
+const gMemeLines = [
     'Monday vs. Friday: a mystery.',
     'Smile, while your teeth last.',
     'Exercise? Nope, extra fries.',
@@ -46,7 +46,8 @@ let gMemes = [
                     y: 80
                 }
             }
-        ]
+        ],
+        snapshotImgData: ''
     }
 ]
 
@@ -63,7 +64,9 @@ function getNewMeme(imgId) {
     return {
         id: generateRandId(6),
         img: getImg(imgId),
-        lines: [newLine]
+        lines: [newLine],
+        snapshotImgData: '',
+        isSaved: false
     }
 }
 
@@ -98,8 +101,8 @@ function getRandomLine() {
 }
 
 function getRandomLineTxt() {
-    const randLineIdx = getRandomInt(0, gLines.length)
-    return memeLines[randLineIdx]
+    const randLineIdx = getRandomInt(0, gMemeLines.length)
+    return gMemeLines[randLineIdx]
 }
 
 function getAllMemes() {
@@ -126,17 +129,13 @@ function addMemeLine(id, line) {
     return meme.lines[meme.lines.length - 1]
 }
 
-function setMemeLineTxt(id, lineIdx, line) {
-    const meme = getMeme(id)
-    meme.lines[lineIdx].txt = line.txt
-}
+function saveMeme(memeToSave) {
+    if (!memeToSave.isSaved) {
+        gMemes.push(memeToSave)
+        memeToSave.isSaved = true
+        return
+    }
 
-function updateMemeLine(id, lineIdx, newLine) {
-    const meme = getMeme(id)
-    meme.lines[lineIdx] = deepMerge(meme.lines[lineIdx], newLine)
-}
-
-function deleteMemeLine(id, lineIdx) {
-    const meme = getMeme(id)
-    meme.lines.splice(lineIdx, 1)
+    let currMeme = gMemes.find(meme => meme.id === memeToSave.id)
+    currMeme = memeToSave
 }

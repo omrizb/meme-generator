@@ -5,11 +5,11 @@ function renderGallery() {
     const imgs = getAllImgs()
 
     imgs.forEach(img => {
-        const imgCard = `<article class="image"><img src="${img.url}" onclick="onImgSelect('${img.id}')"></article>`
+        const imgCard = `<article class="card"><img src="${img.url}" onclick="onImgSelect('${img.id}')"></article>`
         imgCards.push(imgCard)
     })
 
-    document.querySelector('.gallery .images').innerHTML = imgCards.join('')
+    document.querySelector('.gallery .cards').innerHTML = imgCards.join('')
 }
 
 function onImgSelect(imgId) {
