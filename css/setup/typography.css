@@ -1,18 +1,18 @@
 @font-face {
     font-family: roboto-serif;
-    src: url("/assets/fonts/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf");
+    src: url("../../assets/fonts/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf");
 }
 
 @font-face {
     font-family: source-sans;
-    src: url("/assets/fonts/SourceSans3-VariableFont_wght.ttf");
+    src: url("../../assets/fonts/SourceSans3-VariableFont_wght.ttf");
 }
 
 /* Font Awesome */
 
 @font-face {
     font-family: fa-solid;
-    src: url("/assets/fonts/fa-solid-900.ttf");
+    src: url("../../assets/fonts/fa-solid-900.ttf");
 }
 
 .fa-solid::before {
