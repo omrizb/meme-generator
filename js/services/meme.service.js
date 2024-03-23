@@ -23,6 +23,8 @@ initMemeService()
 
 function initMemeService() {
     gMemes = loadFromLocalStorage(MEME_DATA)
+
+    if (!gMemes || gMemes.length === 0) gMemes = []
 }
 
 function getMeme(id) {
@@ -102,6 +104,7 @@ function addMemeLine(id, line) {
 }
 
 function saveMeme(memeToSave) {
+    console.log
     if (!memeToSave.isSaved) {
         gMemes.push(memeToSave)
         memeToSave.isSaved = true
