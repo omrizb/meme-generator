@@ -116,3 +116,10 @@ function saveMeme(memeToSave) {
         }
     })
 }
+
+function deleteMeme(memeId) {
+    const idx = gMemes.findIndex(meme => meme.id === memeId)
+    gMemes.splice(idx, 1)
+    saveToLocalStorage(MEME_DATA, gMemes)
+}
+

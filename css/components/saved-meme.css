@@ -1,0 +1,7 @@
+.page.saved .delete-meme {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background-color: var(--remove-line-background);
+    transition: 0.2s;
+}

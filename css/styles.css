@@ -16,6 +16,7 @@
 @import url("./components/meme-editor.css");
 @import url("./components/msg-box.css");
 @import url("./components/nav.css");
+@import url("./components/saved-meme.css");
 
 /* Media queries */
 @import url("./framework/mq.css");

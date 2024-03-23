@@ -11,10 +11,10 @@
     flex-grow: 1;
     font-family: roboto-serif;
     font-size: 3em;
-    color: var(--red-8);
+    color: var(--logo-part1);
 }
 
 .main-header .logo-2 {
     font-weight: 700;
-    color: var(--red-11);
+    color: var(--logo-part2);
 }
