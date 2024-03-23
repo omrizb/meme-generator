@@ -195,10 +195,9 @@ function getTextFrameMetrics(line) {
 }
 
 function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
+    const elBody = document.querySelector('body')
 
-    if (elContainer.clientWidth < 200) gElCanvas.width = 200
-    else if (elContainer.clientWidth < 400) gElCanvas.width = elContainer.clientWidth
+    if (elBody.clientWidth < 600) gElCanvas.width = 250
     else gElCanvas.width = 400
 }
 
