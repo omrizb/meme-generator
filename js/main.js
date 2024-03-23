@@ -5,12 +5,13 @@ let gCurrPageSection = 'gallery'
 function onInit() {
     setActiveSection()
     renderGallery()
-    renderSavedMemes()
 }
 
 function onSetActiveSection(section) {
     gCurrPageSection = section
     setActiveSection()
+
+    if (section === 'saved') initSavedMemes()
 }
 
 function setActiveSection() {

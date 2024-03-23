@@ -1,5 +1,7 @@
 'use strict'
 
+const MEME_DATA = 'memeData'
+
 const gMemeLines = [
     'Monday vs. Friday: a mystery.',
     'Smile, while your teeth last.',
@@ -13,45 +15,15 @@ const gMemeLines = [
     'Coffee, because adulting is hard.'
 ]
 
-let gMemes = [
-    {
-        id: '123',
-        img: getImg('5'),
-        lines: [
-            {
-                txt: 'I sometimes eat Falafel',
-                fontFace: 'arial',
-                fontSize: '30',
-                lineWidth: '1',
-                strokeStyle: '#ff0000',
-                fillStyle: '#ffff00',
-                isDrag: false,
-                textAlign: 'center',
-                posPercent: {
-                    x: 50,
-                    y: 20
-                }
-            },
-            {
-                txt: 'And I like it',
-                fontFace: 'arial',
-                fontSize: '45',
-                lineWidth: '1',
-                strokeStyle: '#00008b',
-                fillStyle: '#ffffff',
-                isDrag: false,
-                textAlign: 'center',
-                posPercent: {
-                    x: 65,
-                    y: 80
-                }
-            }
-        ],
-        snapshotImgData: ''
-    }
-]
+let gMemes = []
 
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
+
+initMemeService()
+
+function initMemeService() {
+    gMemes = loadFromLocalStorage(MEME_DATA)
+}
 
 function getMeme(id) {
     return structuredClone(gMemes.find(meme => meme.id === id))
@@ -133,9 +105,14 @@ function saveMeme(memeToSave) {
     if (!memeToSave.isSaved) {
         gMemes.push(memeToSave)
         memeToSave.isSaved = true
+        saveToLocalStorage(MEME_DATA, gMemes)
         return
     }
 
-    let currMeme = gMemes.find(meme => meme.id === memeToSave.id)
-    currMeme = memeToSave
+    gMemes.forEach((meme, idx) => {
+        if (meme.id === memeToSave.id) {
+            gMemes[idx] = memeToSave
+            saveToLocalStorage(MEME_DATA, gMemes)
+        }
+    })
 }
