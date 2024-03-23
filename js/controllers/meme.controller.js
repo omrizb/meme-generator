@@ -62,6 +62,9 @@ function setSelectedTextAlign(line) {
 function onSaveMeme() {
     gCurrMeme.snapshotImgData = getImgDataUrl()
     saveMeme(gCurrMeme)
+
+    activateMsgBox('Meme saved')
+
     renderSavedMemes()
 }
 

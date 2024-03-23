@@ -1,6 +1,7 @@
 'use strict'
 
 let gCurrPageSection = 'gallery'
+let gMsgBoxTimeout
 
 function onInit() {
     setActiveSection()
@@ -20,4 +21,17 @@ function setActiveSection() {
         if (page.classList.contains(gCurrPageSection)) page.classList.remove('hidden')
         else page.classList.add('hidden')
     })
+}
+
+function activateMsgBox(msg) {
+    const elMsgBox = document.querySelector('.msg-box')
+    elMsgBox.textContent = msg
+
+    elMsgBox.classList.add('show-box')
+
+    if (gMsgBoxTimeout) clearTimeout(gMsgBoxTimeout)
+
+    gMsgBoxTimeout = setTimeout(() => {
+        elMsgBox.classList.remove('show-box')
+    }, 2000);
 }

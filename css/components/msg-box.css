@@ -1,0 +1,23 @@
+body > main {
+    position: relative;
+}
+
+.msg-box {
+    position: absolute;
+    top: 30%;
+    right: -10%;
+
+    border: 1px solid var(--btn-border);
+    border-start-start-radius: 2em;
+    border-end-start-radius: 2em;
+    padding: 1em;
+    font-size: 1.2em;
+    background-image: var(--msg-box-gradient);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.show-box {
+    right: -2px;
+    opacity: 1;
+}
