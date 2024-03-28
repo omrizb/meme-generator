@@ -3,8 +3,8 @@
 let gCurrMeme
 
 function initMemeEditor(memeId, imgId) {
-    setMemeCanvas('edit-meme')
     setCurrMeme(memeId, imgId)
+    setMemeCanvas('edit-meme', gCurrMeme.img.url)
     initLines()
     renderMeme()
 }
@@ -21,7 +21,7 @@ function getCurrMeme() {
 function renderMeme() {
     const lines = getLines()
     const currLineIdx = getLineIdx()
-    drawImageWithLines(gCurrMeme.img.url, lines, currLineIdx)
+    drawImageWithLines(lines, currLineIdx)
 
     const currLine = getCurrLine()
     if (!currLine) return
@@ -69,12 +69,6 @@ function onSaveMeme() {
 }
 
 function onDownloadMeme(elLink) {
-    // const elTmpCanvas = document.createElement('canvas')
-    // elTmpCanvas.classList.add('tmp-canvas')
-    // document.body.appendChild(elTmpCanvas)
-    // setMemeCanvas('tmp-canvas')
-    // drawImageWithLines(gCurrMeme.img.url, gCurrMeme.lines, 0)
-
     const imgContent = getImgDataUrl()
     elLink.href = imgContent
 }

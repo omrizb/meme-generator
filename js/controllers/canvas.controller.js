@@ -1,15 +1,19 @@
 'use strict'
 
 let gElCanvas
+let gElImg
 let gCtx
 let gIsDown = false
 let gMovingLineIdx = -1
 
 const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
-function setMemeCanvas(canvasClassName) {
+function setMemeCanvas(canvasClassName, imgSrc) {
     gElCanvas = document.querySelector(`canvas.${canvasClassName}`)
     gCtx = gElCanvas.getContext('2d')
+
+    gElImg = new Image()
+    gElImg.src = imgSrc
 
     resizeCanvas()
     addListeners()
@@ -90,15 +94,9 @@ function getEvPos(ev) {
 
 }
 
-function drawImageWithLines(imgSrc, lines, currLineIdx = -1) {
-    const elImg = new Image()
-    elImg.src = imgSrc
-    gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
-
-    elImg.onload = () => {
-        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawLines(lines, currLineIdx)
-    }
+function drawImageWithLines(lines, currLineIdx = -1) {
+    gCtx.drawImage(gElImg, 0, 0, gElCanvas.width, gElCanvas.height)
+    drawLines(lines, currLineIdx)
 }
 
 function drawLines(lines, currLineIdx) {
@@ -199,6 +197,8 @@ function resizeCanvas() {
 
     if (elBody.clientWidth < 600) gElCanvas.width = 250
     else gElCanvas.width = 400
+
+    gElCanvas.height = (gElImg.naturalHeight / gElImg.naturalWidth) * gElCanvas.width
 }
 
 function getImgDataUrl() {
